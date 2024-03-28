@@ -12,10 +12,10 @@ function findIntersection() {
 
   const intersectionPointDiv = document.getElementById("intersectionPoint");
   if (intersectionPoint !== null) {
-    intersectionPointDiv.textContent =
-      "Intersection Point Value: " + intersectionPoint;
+      intersectionPointDiv.textContent =
+          "Intersection Point Value: " + intersectionPoint;
   } else {
-    intersectionPointDiv.textContent = "No intersection found.";
+      intersectionPointDiv.textContent = "No intersection found.";
   }
 }
 
@@ -23,17 +23,34 @@ function findIntersection() {
 function getIntersectionPoint(arrA, arrB) {
   const set = new Set(arrA);
   for (const val of arrB) {
-    if (set.has(val)) {
-      return val;
-    }
+      if (set.has(val)) {
+          return val;
+      }
   }
   return null; // No intersection found
 }
 
-// Add this script to clear the input field on page load
-document.addEventListener('DOMContentLoaded', function() {
-  var listA = document.getElementById('listA');
-  listA.value = ''; // Set the input value to an empty string
-  var listB = document.getElementById('listB');
-  listB.value = ''; // Set the input value to an empty string
+// Function to clear input fields
+function clearInputFields() {
+  document.getElementById('listA').value = '';
+  document.getElementById('listB').value = '';
+}
+
+// Add event listener for window.onload event to clear input fields
+window.onload = clearInputFields;
+
+// Add event listener for "keypress" event to input fields
+document.getElementById("listA").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+      findIntersection();
+  }
 });
+
+document.getElementById("listB").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+      findIntersection();
+  }
+});
+
+// Add event listener for button click
+document.getElementById("findIntersectionButton").addEventListener("click", findIntersection);
